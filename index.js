@@ -55,6 +55,16 @@ async function run() {
          const result = await touristSpotCollection.insertOne(newTouristSpot);
          res.send(result);
       });
+
+      app.get("/uploadsByEmail/:email", async (req, res) => {
+         const email = req.params.email;
+         try {
+            const userData = await touristSpotCollection.find({ userEmail: email }).toArray();
+            res.json(userData);
+         } catch (error) {
+            res.status(500).json({ error: "Failed to fetch user" });
+         }
+      });
       // Send a ping to confirm a successful connection
       await client.db("admin").command({ ping: 1 });
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
