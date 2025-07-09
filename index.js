@@ -101,6 +101,11 @@ async function run() {
 }
 run().catch(console.dir);
 
+app.get("/", (req, res) => {
+   res.send("SERVER IS RUNNING");
+});
+
 app.listen(port, () => {
    console.log(`server is running: ${port}`);
 });
+//module.exports = app;
